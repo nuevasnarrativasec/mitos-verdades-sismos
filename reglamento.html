@@ -89,18 +89,20 @@
   max-width: 560px;
 }
 
-/* En pantallas pequeñas */
-@media (max-width: 420px) {
+/* ---- MÓVIL ---- */
+@media (max-width: 480px) {
   #slider-wrapper {
     width: 100vw;
-    height: calc(100vw * 1280 / 720);
-    overflow: inherit;
+    height: calc(var(--vh, 1vh) * 75);
+    min-height: 500px;
+    overflow: hidden;
   }
   #slider-wrapper.portada {
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: unset;
   }
-  #slide-0 .portada-img { max-width: 90%; }
+  #slide-0 .portada-img { max-width: 115%;         max-height: inherit;}
 }
 
 /* ---- SLIDES ---- */
@@ -120,7 +122,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
 }
 
 /* Capa de texto */
@@ -273,8 +275,24 @@ p.white { color: white; }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 480px) {
-  .slide-layer { padding: 2em 1.6em 0; }
-  .slide-nav { padding: 1em 1.2em 1.2em; }
+  .slide-layer { padding: 1.6em 1.6em 6em; }
+  .slide-nav   { padding: 1.2em 1.4em 1.6em; }
+
+    #slide-2 .slide-bg,
+    #slide-3 .slide-bg,
+    #slide-4 .slide-bg,
+    #slide-5 .slide-bg,
+    #slide-6 .slide-bg,
+    #slide-7 .slide-bg,
+    #slide-8 .slide-bg,
+    #slide-9 .slide-bg,
+    #slide-10 .slide-bg,
+    #slide-11 .slide-bg,
+    #slide-12 .slide-bg,
+    #slide-13 .slide-bg{
+        object-position: center -150px;
+    }
+
 }
 
 .slide-creditos-text{
@@ -369,7 +387,7 @@ p.white { color: white; }
 <div id="slider-wrapper">
 <!-- ===================== SLIDE 0 — Portada ===================== -->
 <div class="slide-section active" id="slide-0">
-  <img class="portada-img" src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/portada-sismos.jpg" alt="Portada"/>
+  <img class="portada-img" src="https://nuevasnarrativasec.github.io/agenda-conciertos-2026/img/portada-sismos.jpg?v2" alt="Portada"/>
   <h1 class="portada-h1">Mitos y verdades sobre los sismos</h1>
   <p class="portada-titulo">¿Los cambios de estación provocan temblores y los animales predicen sismos?</p>
   <a class="btn-empezar" href="#1">Empezar</a>
@@ -577,6 +595,13 @@ p.white { color: white; }
 
 <!-- ===================== JAVASCRIPT ===================== -->
 <script>
+// Calcula el --vh real del viewport móvil
+function setVh() {
+  document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+}
+setVh();
+window.addEventListener('resize', setVh);
+
 (function () {
   var total = 14;
 
